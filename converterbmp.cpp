@@ -45,7 +45,15 @@ bool ConverterBMP::makeConvert()
         std::cout << "BMP header not generated" << std::endl;
 
     std::vector<uint8_t> *id = new std::vector<unsigned char>((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
-    std::vector<uint16_t> *input_data = (std::vector<uint16_t> *)id;
+    std::vector<uint16_t> *input_data = new std::vector<uint16_t>();
+    if (convParams.getBit_pp() > 8)
+        input_data = (std::vector<uint16_t> *)id;
+    else {
+        for (int i = 0; i < id->size(); ++i) {
+            uint16_t temp = id->at(i);
+            input_data->push_back(temp);
+        }
+    }
 
     std::vector<std::vector<uint8_t> > *out_data = new std::vector<std::vector<uint8_t> >();
 

@@ -81,7 +81,7 @@ bool ConverterParams::parseFileSize(const std::string size)
 
 bool ConverterParams::parseBPP(const int bpp)
 {
-    if (bpp != 10 && bpp != 16)
+    if (bpp < 6 || bpp > 16)
         return false;
     else
         setBit_pp(bpp);
